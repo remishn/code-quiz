@@ -2,37 +2,54 @@ var startBtnEl = document.querySelector("#start-quiz")
 var quizContentEl = document.querySelector("#quiz-content")
 
 var questionIndex = 0
+var timeLeft = 120;
+var timerInterval;
+var score = 0;
+var correct;
 var questionBank = [
     {
-        question: "question 1 from bank", 
+        question: "Inside which HTML element do we put the JavaScript?", 
         choices: [
             {
-                text: "option 1",
+                text: "<js>",
                 correct: false,
             },
             {
-                text: "option 2",
+                text: "<script>",
                 correct: true
             }
         ]
     },
     {
-        question: "question 2 from bank", 
+        question: "What does HTML stand for?", 
         choices: [
             {
-                text: "option 1",
+                text: "Home Tool Markup Language",
                 correct: false,
             },
             {
-                text: "option 2",
+                text: "Hyper Text Markup Language",
                 correct: true
+            }
+            
+        ]
+    },
+   
+    {
+        question: "What does CSS stand for?", 
+        choices: [
+            {
+                text: "Creative Style Sheets",
+                correct: false,
             },
             {
-                text: "option 3",
-                correct: false
+                text: "Cascading Style Sheets",
+                correct: true
             }
+            
         ]
-    }
+    },
+
 ]
 
 var processAnswer = function(event) {
@@ -80,6 +97,8 @@ var startQuiz = function() {
     var questionContentEl = createQuestionElement(questionData)
 
     quizContentEl.appendChild(questionContentEl)
+
 }
 
 startBtnEl.addEventListener("click", startQuiz)
+
