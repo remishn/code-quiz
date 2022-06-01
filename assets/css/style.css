@@ -4,6 +4,10 @@
 background-color: rgb(224, 233, 253);
 }
 
+ .high-score {
+  width: 200px;
+
+}
 
 .information { 
     font-family: sans-serif;
@@ -24,7 +28,7 @@ background-color: rgb(224, 233, 253);
     font-weight: 200;
 }
 
-.choices {
+.choice {
 
     flex-direction: column;
 }
@@ -46,8 +50,5 @@ background-color: rgb(224, 233, 253);
       box-shadow: 4px 3px 6px #c0bac1;
   }
 
-#startpage{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+
+
