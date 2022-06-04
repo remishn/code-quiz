@@ -3,6 +3,7 @@ var quizContentEl = document.querySelector("#quiz-content")
 var highScoreBtnEl = document.querySelector("#high-score")
 var timerEl = document.querySelector("#time-left")
 
+
 var questionIndex = 0
 var timeLeft = 75;
 var intervalId 
@@ -55,6 +56,20 @@ var questionBank = [
     },
 
 ]
+
+function submitScore() {
+    // find element 
+    var initialInputEl = document.querySelector("#initial")
+    
+    // read initials
+    var user = initialInputEl.value
+    console.log(user)
+
+    // save initials
+    localStorage.setItem(user, timeLeft)
+
+    // show highscore
+}
 
 function monitorTime() {
     timeLeft = timeLeft - 1
@@ -134,7 +149,6 @@ var processAnswer = function(answer) {
 function showHighscore() {
     quizContentEl.innerHTML =""
 
-    displayHighscore();
 }
 
 // users can view result and highscore
@@ -156,15 +170,27 @@ function createResultElement(result) {
 
    var initialInputEl = document.createElement("input")
    initialInputEl.classList.add("initial")
+   initialInputEl.id = "initial"
    
    var submitEl = document.createElement("button");
    submitEl.classList.add("submit");
    submitEl.textContent = "Submit"
 
+   submitEl.addEventListener("click", submitScore)
+
+   var enterInitialEl = document.createElement("div")
+   enterInitialEl.classList.add("enter-initials")
+   enterInitialEl.textContent = "enter-initials"
+
+   var aEl = document.createElement("div")
+   aEl.appendChild(enterInitialEl)
+   aEl.appendChild(initialInputEl)
+   aEl.appendChild(submitEl)
+   
+
    resultEl.appendChild(AllDoneEl);
    resultEl.appendChild(finalResultEl);
-   resultEl.appendChild(initialInputEl)
-   resultEl.appendChild(submitEl);
+   resultEl.appendChild(aEl)
 
    return resultEl;
 }

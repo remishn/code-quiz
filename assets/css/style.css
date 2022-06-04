@@ -41,23 +41,26 @@ header a {
 
     flex-direction: column;
 }
-  button {
-    display: inline-block;
-    font-family: sans-serif;
-    background-color: #a75ef1;
-    border-radius: 10px;
-    border: 3px double #cccccc;
-    color: #eeeeee;
-    text-align: center;
-    font-size: 15px;
-    padding: 20px;
-    width: 380px;
-    margin-top: 3px;
-  }
+button {
+  display: inline-block;
+  font-family: sans-serif;
+  background-color: #a75ef1;
+  border-radius: 10px;
+  border: 3px double #cccccc;
+  color: #eeeeee;
+  text-align: center;
+  font-size: 15px;
+  padding: 5px 10px;
+  margin-top: 3px;
+}
 
-  button:hover{
-      box-shadow: 4px 3px 6px #c0bac1;
-  }
+.enter-initials {
+  display: inline-block;
+}
+
+button:hover{
+  box-shadow: 4px 3px 6px #c0bac1;
+}
 
 
 
