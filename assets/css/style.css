@@ -4,7 +4,16 @@
 background-color: rgb(224, 233, 253);
 }
 
- .high-score {
+header {
+  display: flex;
+  padding: 5px 10px;
+}
+
+header a {
+  margin-right: auto;
+}
+
+.high-score {
   width: 200px;
 
 }

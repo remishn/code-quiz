@@ -1,9 +1,11 @@
 var startBtnEl = document.querySelector("#start-quiz")
 var quizContentEl = document.querySelector("#quiz-content")
-var HighScoreBtnEl = document.querySelector("#high-score")
+var highScoreBtnEl = document.querySelector("#high-score")
+var timerEl = document.querySelector("#time-left")
 
 var questionIndex = 0
-var timeLeft = 120;
+var timeLeft = 75;
+var intervalId 
 var timerInterval;
 var score = 0;
 var correct;
@@ -53,6 +55,21 @@ var questionBank = [
     },
 
 ]
+
+function monitorTime() {
+    timeLeft = timeLeft - 1
+    timerEl.innerText = "" + timeLeft
+
+    if (timeLeft < 1) {
+        clearInterval(intervalId)
+        quizContentEl.innerHTML = ""
+    
+        var element = createResultElement(timeLeft)
+        
+        quizContentEl.appendChild(element)
+    }
+}
+
 // create questions in cycles
 
 function createQuestionElement(questionData) {
@@ -93,42 +110,26 @@ var processAnswer = function(answer) {
 
     var correct = answer.target.dataset.correct
 
-
-    if (correct === "true") {
-        alert("correct");
-    
+    if (correct !== "true") {
+        timeLeft = timeLeft - 5
     }
-    else {
-        alert("wrong")
-    }
-
+  
     quizContentEl.innerHTML = ""
 
     questionIndex = questionIndex + 1
 
     var element = null
     if (questionIndex === questionBank.length) {
-        alert("end of question")
-        element = createResultElement(10)
+        clearInterval(intervalId)
+        element = createResultElement(timeLeft)
     } else {
         var questionData = questionBank[questionIndex]
         element = createQuestionElement(questionData)
     }
     
     quizContentEl.appendChild(element)
-    
 }
-    //Timer
-
-  timerInterval = setInterval(function() {
-
-  })
-
-    //result function at the end to show results
-function showResult() {
-
-}
-
+   
 // remove "start quiz" & display highscore 
 function showHighscore() {
     quizContentEl.innerHTML =""
@@ -153,11 +154,16 @@ function createResultElement(result) {
 
    finalResultEl.textContent = "Final Score: " + result
 
+   var initialInputEl = document.createElement("input")
+   initialInputEl.classList.add("initial")
+   
    var submitEl = document.createElement("button");
    submitEl.classList.add("submit");
+   submitEl.textContent = "Submit"
 
    resultEl.appendChild(AllDoneEl);
    resultEl.appendChild(finalResultEl);
+   resultEl.appendChild(initialInputEl)
    resultEl.appendChild(submitEl);
 
    return resultEl;
@@ -166,23 +172,17 @@ function createResultElement(result) {
 var startQuiz = function() {
     // remove information
     quizContentEl.innerHTML = ""
-
-
+    
     var questionData = questionBank[questionIndex]
 
     // add questions
     var questionContentEl = createQuestionElement(questionData)
-    // var resultEl = createResultElement(10)
-    
-    // add timer div
-    
     
     quizContentEl.appendChild(questionContentEl)
-    // quizContentEl.appendChild(resultEl)
 
+    // add timer div  
+    intervalId = setInterval(monitorTime, 1000);
 }
-var timerEl = document.createElement("div")
-    timerEl.classList.add("Time")
 
 startBtnEl.addEventListener("click", startQuiz)
 
